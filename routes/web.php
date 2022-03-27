@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PostController;
+use App\Models\Posts;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,68 +16,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home', [
-        'title' => 'HOME',
-    ]);
-});
+Route::get('/', [HomeController::class, 'index']);
+Route::get('/about', [HomeController::class, 'about']);
 
-Route::get('/blog', function () {
-    $blog_post = [
-        [
-            'title' => 'Judul Satu',
-            'slug' => 'judul-Satu',
-            'author' => 'Author 1',
-            'body' =>
-                'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, ea quos fugit enim magni doloremque nobis ipsum modi! Nostrum reiciendis illo ratione facilis provident reprehenderit ea sapiente autem quibusdam eos voluptatem quam, hic vel natus aliquid id itaque! Voluptates illum minima repudiandae consequuntur molestias id inventore fugiat voluptate aut blanditiis voluptas reprehenderit similique dolor, dignissimos accusantium ut magnam iure consequatur. Voluptatem vitae consequuntur odio nesciunt atque, officia aperiam! Quam, cum. Facilis, eum hic voluptates quam beatae corporis minus odio ratione.',
-        ],
-        [
-            'title' => 'Judul Dua',
-            'slug' => 'judul-dua',
-            'author' => 'Author 2',
-            'body' =>
-                'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, ea quos fugit enim magni doloremque nobis ipsum modi! Nostrum reiciendis illo ratione facilis provident reprehenderit ea sapiente autem quibusdam eos voluptatem quam, hic vel natus aliquid id itaque! Voluptates illum minima repudiandae consequuntur molestias id inventore fugiat voluptate aut blanditiis voluptas reprehenderit similique dolor, dignissimos accusantium ut magnam iure consequatur. Voluptatem vitae consequuntur odio nesciunt atque, officia aperiam! Quam,',
-        ],
-    ];
-
-    return view('posts', [
-        'title' => 'POSTS',
-        'posts' => $blog_post,
-    ]);
-});
-
-Route::get('/about', function () {
-    return view('about', [
-        'title' => 'ABOUT',
-        'name' => 'Mohamad Lazuardi Noor',
-        'email' => 'lazuardi.reznnov@gmail.com',
-    ]);
-});
-Route::get('post/{slug}', function ($slug) {
-    $blog_post = [
-        [
-            'title' => 'Judul Satu',
-            'slug' => 'judul-Satu',
-            'author' => 'Author 1',
-            'body' =>
-                'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, ea quos fugit enim magni doloremque nobis ipsum modi! Nostrum reiciendis illo ratione facilis provident reprehenderit ea sapiente autem quibusdam eos voluptatem quam, hic vel natus aliquid id itaque! Voluptates illum minima repudiandae consequuntur molestias id inventore fugiat voluptate aut blanditiis voluptas reprehenderit similique dolor, dignissimos accusantium ut magnam iure consequatur. Voluptatem vitae consequuntur odio nesciunt atque, officia aperiam! Quam, cum. Facilis, eum hic voluptates quam beatae corporis minus odio ratione.',
-        ],
-        [
-            'title' => 'Judul Dua',
-            'slug' => 'judul-dua',
-            'author' => 'Author 2',
-            'body' =>
-                'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, ea quos fugit enim magni doloremque nobis ipsum modi! Nostrum reiciendis illo ratione facilis provident reprehenderit ea sapiente autem quibusdam eos voluptatem quam, hic vel natus aliquid id itaque! Voluptates illum minima repudiandae consequuntur molestias id inventore fugiat voluptate aut blanditiis voluptas reprehenderit similique dolor, dignissimos accusantium ut magnam iure consequatur. Voluptatem vitae consequuntur odio nesciunt atque, officia aperiam! Quam,',
-        ],
-    ];
-
-    foreach ($blog_post as $post) {
-        if ($post['slug'] === $slug) {
-            $new_post = $post;
-        }
-    }
-    return view('post', [
-        'title' => 'SINGLE POST',
-        'posts' => $new_post,
-    ]);
-});
+Route::get('/blog', [PostController::class, 'index']);
+Route::get('post/{slug}', [PostController::class, 'show']);
