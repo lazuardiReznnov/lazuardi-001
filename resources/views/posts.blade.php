@@ -5,7 +5,7 @@
         @foreach($posts as $post)
         <article class="mb-2">
         <a href="post/{{ $post->slug }}"> <h2>{{ $post->title}}</h2></a>
-            <h5>By : {{ $post->author }}</h5>
+            <p>By : <a href="/author/{{ $post->user->username }}">{{  $post->user->username  }}</a> in <a href="/category/{{ $post->category->slug }}"> {{ $post->category->name }}</a></p>
             <p>{{ $post->excerpt }}</p>
         </article>
         @endforeach
