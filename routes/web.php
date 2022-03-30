@@ -1,11 +1,13 @@
 <?php
 
+use App\Models\User;
+use App\Models\Posts;
+use App\Models\Category;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
-use App\Models\Category;
-use App\Models\Posts;
-use App\Models\User;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,25 +26,8 @@ Route::get('/about', [HomeController::class, 'about']);
 Route::get('/blog', [PostController::class, 'index']);
 Route::get('/post/{post:slug}', [PostController::class, 'show']);
 
-Route::get('/category', function () {
-    return view('categories', [
-        'title' => 'Post Categories',
-        'categories' => Category::all(),
-    ]);
-});
+Route::get('/category', [CategoryController::class, 'index']);
+Route::get('/category/{category:slug}', [CategoryController::class, 'show']);
 
-Route::get('/category/{category:slug}', function (Category $category) {
-    return view('category', [
-        'title' => $category->name,
-        'posts' => $category->post,
-        'category' => $category->name,
-    ]);
-});
-Route::get('/authors', [AuthorController::class, 'index']);
-
-Route::get('/author/{user:username}', function (User $user) {
-    return view('posts', [
-        'title' => 'User Post',
-        'posts' => $user->post,
-    ]);
-});
+Route::get('/author', [AuthorController::class, 'index']);
+Route::get('/author/{user:username}', [AuthorController::class, 'show']);

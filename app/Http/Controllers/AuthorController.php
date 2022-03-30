@@ -12,7 +12,15 @@ class AuthorController extends Controller
     {
         return view('author', [
             'title' => 'Daftar Author',
-            'author' => User::latest()->get(),
+            'authors' => User::latest()->get(),
+        ]);
+    }
+
+    public function show(User $user)
+    {
+        return view('posts', [
+            'title' => 'User Post',
+            'posts' => $user->post->load('category', 'user'),
         ]);
     }
 }

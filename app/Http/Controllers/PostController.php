@@ -19,7 +19,7 @@ class PostController extends Controller
     {
         return view('post', [
             'title' => 'SINGLE POST',
-            'posts' => $post,
+            'posts' => $post->load('category', 'user'),
         ]);
     }
 }
