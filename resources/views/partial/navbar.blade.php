@@ -8,9 +8,9 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav ms-auto">
-                <a class="nav-link {{ ($title==="HOME") ? "active" : ''}}" href="/">Home</a>
-                <a class="nav-link {{ ($title==="ABOUT") ? "active" : ''}}" href="/about">About</a>
-                <a class="nav-link {{ ($title==="POSTS") ? "active" : ''}}" href="/blog">Blog</a>
+                <a class="nav-link {{ ($active==="HOME") ? "active" : ''}}" href="/">Home</a>
+                <a class="nav-link {{ ($active==="ABOUT") ? "active" : ''}}" href="/about">About</a>
+                <a class="nav-link {{ ($active==="blog") ? "active" : ''}}" href="/blog">Blog</a>
             </div>
         </div>
     </div>

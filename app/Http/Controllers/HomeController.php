@@ -10,6 +10,7 @@ class HomeController extends Controller
     {
         return view('home', [
             'title' => 'HOME',
+            'active' => 'HOME',
         ]);
     }
 
@@ -17,6 +18,7 @@ class HomeController extends Controller
     {
         return view('about', [
             'title' => 'ABOUT',
+            'active' => 'blog',
             'name' => 'Mohamad Lazuardi Noor',
             'email' => 'lazuardi.reznnov@gmail.com',
         ]);

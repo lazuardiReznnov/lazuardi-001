@@ -11,6 +11,7 @@ class AuthorController extends Controller
     public function index()
     {
         return view('author', [
+            'active' => 'blog',
             'title' => 'Daftar Author',
             'authors' => User::latest()->get(),
         ]);
@@ -19,7 +20,8 @@ class AuthorController extends Controller
     public function show(User $user)
     {
         return view('posts', [
-            'title' => 'User Post',
+            'active' => 'blog',
+            'title' => 'POST AUTHOR : ' . $user->name,
             'posts' => $user->post->load('category', 'user'),
         ]);
     }
