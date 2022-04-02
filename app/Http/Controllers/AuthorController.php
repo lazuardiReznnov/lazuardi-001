@@ -17,12 +17,12 @@ class AuthorController extends Controller
         ]);
     }
 
-    public function show(User $user)
-    {
-        return view('posts', [
-            'active' => 'blog',
-            'title' => 'POST AUTHOR : ' . $user->name,
-            'posts' => $user->post->load('category', 'user'),
-        ]);
-    }
+    // public function show(User $user)
+    // {
+    //     return view('posts', [
+    //         'active' => 'blog',
+    //         'title' => 'POST AUTHOR : ' . $user->name,
+    //         'posts' => $user->post->load('category', 'user'),
+    //     ]);
+    // }
 }

@@ -2,10 +2,21 @@
 
 @section('container')
         <h1>POST CATEGORIES</h1>
-        @foreach($categories as $category)
-       <ul>
-           <li>  <a class="text-decoration-none" href="/category/{{ $category->slug }}"> <h2>{{ $category->name}}</h2></a></li>
-       </ul> 
-        @endforeach
+        <div class="container">
+            <div class="row">
+                @foreach($categories as $category)
+                <div class="col-md-4 mb-2">
+                    <a href="/category/{{ $category->slug }}">
+                    <div class="card bg-dark text-white">
+                        <img src="https://source.unsplash.com/500x400/?programming" class="card-img" alt="...">
+                        <div class="card-img-overlay d-flex align-items-center p-0">
+                          <h5 class="card-title text-center flex-fill p-2 fs-3" style="background-color: rgba(0, 0, 0, 0.7)">{{ $category->name }}</h5>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+                @endforeach
+            </div>
+        </div>
 
 @endSection
