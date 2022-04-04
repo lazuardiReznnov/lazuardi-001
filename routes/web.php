@@ -6,8 +6,10 @@ use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,3 +33,6 @@ Route::get('/category/{category:slug}', [CategoryController::class, 'show']);
 
 Route::get('/author', [AuthorController::class, 'index']);
 Route::get('/author/{user:username}', [AuthorController::class, 'show']);
+
+Route::get('/login', [LoginController::class, 'index']);
+Route::get('/register', [RegisterController::class, 'index']);
