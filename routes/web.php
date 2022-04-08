@@ -38,6 +38,7 @@ Route::get('/author/{user:username}', [AuthorController::class, 'show']);
 Route::get('/login', [LoginController::class, 'index'])
     ->name('login')
     ->middleware('guest');
+
 Route::post('/login', [LoginController::class, 'auth']);
 Route::post('/logout', [LoginController::class, 'logout']);
 
@@ -53,3 +54,7 @@ Route::get('dashboard', function () {
 Route::resource('dashboard/posts', DashboardPostController::class)->middleware(
     'auth'
 );
+Route::get('/dashboard/posts/checkSlug', [
+    DashboardPostController::class,
+    'checkSlug',
+]);

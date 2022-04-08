@@ -5,6 +5,7 @@
     <h1 class="h2">My Posts </h1>
 </div>
     <div class="table-responsive col-lg-8">
+        <a href="/dashboard/posts/create" class="btn btn-primary mb-3">Create New Post</a>
         <table class="table table-striped table-sm">
           <thead>
             <tr>
@@ -18,7 +19,8 @@
             @if($posts->count())
                 @foreach($posts as $post)
                 <tr>
-                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ ($posts->currentpage()-1) * $posts->perpage() + $loop->index + 1 }}
+                    </td>
                     <td>{{ $post->title }}</td>
                     <td>{{ $post->category->name }}</td>
                     <td>

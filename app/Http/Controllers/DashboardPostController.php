@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\post;
 use Illuminate\Http\Request;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 
 use function Ramsey\Uuid\v1;
 
@@ -18,7 +19,7 @@ class DashboardPostController extends Controller
     {
         return view('dashboard.posts.index', [
             'posts' => Post::where('user_id', auth()->user()->id)
-                ->paginate(3)
+                ->paginate(10)
                 ->withQueryString(),
         ]);
     }
@@ -30,7 +31,7 @@ class DashboardPostController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.posts.create');
     }
 
     /**
@@ -89,5 +90,14 @@ class DashboardPostController extends Controller
     public function destroy(post $post)
     {
         //
+    }
+
+    // sluggable
+    public function checkSlug(Request $request)
+    {
+        // $slug = SlugService::createSlug(Post::class, 'slug', $request->title);
+        $slug = SlugService::createSlug(Post::class, 'slug', $request->title);
+
+        return response()->json(['slug' => $slug]);
     }
 }
