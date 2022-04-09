@@ -7,7 +7,11 @@
             <h1 class="my-3">{{ $post->title }}</h1>
            <a href=" /dashboard/posts" class="btn btn-success"><span data-feather='arrow-left'></span> Back To all Post</a>
            <a href="" class="btn btn-warning"><span data-feather='eye'></span> Edit</a>
-           <a href="" class="btn btn-danger"><span data-feather='x-circle'></span> Delete</a>
+           <form action="/dashboard/posts/{{ $post->slug }}" method="post" class="d-inline">
+            @method('delete')
+            @csrf
+            <button class="btn btn-danger" onclick="return confirm('are You sure ??')"><span data-feather="x-circle"></span></button>
+        </form>
                            
                 <img src="  https://source.unsplash.com/1200x400/?programming" class="card-img-top mt-3" alt="..." class="img-fluid">
             <article class="my-3">
