@@ -22,7 +22,14 @@
         @if($posts->count())
         <!-- Hero -->
         <div class="card mb-3">
-            <img src="  https://source.unsplash.com/1200x400/?programming" class="card-img-top" alt="...">
+            @if($posts[0]->image)
+            <div style="max-height: 350px; overflow:hidden">
+              <img src="{{ asset('storage/'. $posts[0]->image) }}" class="card-img-top mt-3" alt="..." class="img-fluid">    
+            </div>
+            @else
+            <img src="  https://source.unsplash.com/1200x400/?programming" class="card-img-top mt-3" alt="..." class="img-fluid">
+            @endif
+            
             <div class="card-body text-center">
             <h3 class="card-title">{{ $posts[0]->title }}</h3>
             <p><small>
@@ -40,7 +47,13 @@
                 @foreach($posts->skip(1) as $post)
                     <div class="col-md-4 mb-2">
                         <div class="card">
-                            <img src="  https://source.unsplash.com/500x400/?programming" class="card-img-top" alt="...">
+                            @if($post->image)
+                           
+                              <img src="{{ asset('storage/'. $post->image) }}" class="card-img-top mt-3" alt="..." class="img-fluid">    
+                           
+                            @else
+                            <img src="  https://source.unsplash.com/1200x400/?programming" class="card-img-top mt-3" alt="..." class="img-fluid">
+                            @endif
                             <div class="card-body">
                               <h5 class="card-title">{{ $post->title}}</h5>
                               <p><small>
