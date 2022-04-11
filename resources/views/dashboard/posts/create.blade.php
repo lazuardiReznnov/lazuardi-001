@@ -41,9 +41,9 @@
             </div>
             <div class="mb-3">
               <label for="image" class="form-label">Upload Image</label>
-              <img class="img-preview img-fluid mb-2">
+              <img class="img-preview img-fluid mb-2 col-sm-5">
               <input class="form-control @error('image') is-invalid @enderror"" type="file" id="image" name="image" onchange="previewImage()">
-              @error('slug')
+              @error('image')
               <div class="invalid-feedback">
                  {{ $message }}
               </div>
@@ -64,43 +64,5 @@
     </div>
 </div>
 
-<script>
-    const title =document.querySelector('#title');
-    const slug = document.querySelector('#slug');
-
-    title.addEventListener('change', function(){
-        fetch('/dashboard/post/checkSlug?title=' + title.value)
-        .then(response => response.json())
-        .then(data => slug.value = data.slug)
-    });
-
-    document.addEventListener('trix-file-accept', function(e){
-      e.preventDefault();
-    })
-
-    function previewImage(){
-      const image =document.querySelector('#image');
-      const imgPreview = document.querySelector('.img-preview');
-
-      imgPreview.style.display = 'block';
-
-      const oFReader = new FileReader();
-      oFReader.readAsDataURL(image.files[0]);
-
-        oFReader.onload = function(oFREvent){
-        imgPreview.src = oFREvent.target.result;
-        
-      }
-      // slug alternatif
-      // const title = document.querySelector("#title");
-      //   const slug = document.querySelector("#slug");
-
-      //   title.addEventListener("change", function() {
-      //       let preslug = title.value;
-      //       preslug = preslug.replace(/ /g,"-");
-      //       slug.value = preslug.toLowerCase();
-      //   });
-    }
-</script>
 
 @endsection

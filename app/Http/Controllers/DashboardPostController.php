@@ -6,6 +6,7 @@ use App\Models\post;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\support\Facades\Storage;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 
 use function Ramsey\Uuid\v1;
@@ -108,8 +109,8 @@ class DashboardPostController extends Controller
     {
         $rules = [
             'title' => 'required|max:20',
-
             'category_id' => 'required',
+            'image' => 'image|file|max:2048',
             'body' => 'required',
         ];
 
@@ -118,6 +119,14 @@ class DashboardPostController extends Controller
         }
 
         $validatedData = $request->validate($rules);
+        if ($request->file('image')) {
+            if ($request->old_image) {
+                storage::delete($request->old_image);
+            }
+            $validatedData['image'] = $request
+                ->file('image')
+                ->store('post-images');
+        }
 
         $validatedData['user_id'] = auth()->user()->id;
         $validatedData['excerpt'] = Str::limit(strip_tags($request->body), 200);
@@ -139,7 +148,9 @@ class DashboardPostController extends Controller
     public function destroy(post $post)
     {
         Post::destroy($post->id);
-
+        if ($post->image) {
+            storage::delete($post->image);
+        }
         return redirect('/dashboard/posts')->with(
             'success',
             'New Post Has Been Deleted.'
